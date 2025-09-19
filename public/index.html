@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus & Object Detection in Video Interviews</title>
+    
+    <!-- MediaPipe Face Detection -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_detection/face_detection.js"></script>
+    
+    <!-- TensorFlow.js for Object Detection -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.2.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.2/dist/coco-ssd.min.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Focus & Object Detection System</h1>
+            <p class="subtitle">Advanced AI-powered monitoring for video interviews</p>
+        </header>
+
+        <div class="main-content">
+            <div class="video-section">
+                <h2 class="section-title">Video Feed & Detection</h2>
+                
+                <div class="video-container">
+                    <video id="videoElement" autoplay playsinline muted></video>
+                    <canvas id="canvasElement"></canvas>
+                </div>
+                
+                <div class="controls">
+                    <button id="startBtn" class="btn-primary">Start Camera</button>
+                    <button id="stopBtn" class="btn-danger" disabled>Stop Camera</button>
+                    <span id="cameraStatus" class="loading">Camera not started</span>
+                </div>
+                
+                <div class="status-grid">
+                    <div class="status-item">
+                        <div id="noFaceTimer" class="status-value">0s</div>
+                        <div class="status-label">No Face Time</div>
+                    </div>
+                    <div class="status-item">
+                        <div id="lookingAwayTimer" class="status-value">0s</div>
+                        <div class="status-label">Looking Away Time</div>
+                    </div>
+                    <div class="status-item">
+                        <div id="faceCount" class="status-value">0</div>
+                        <div class="status-label">Faces Detected</div>
+                    </div>
+                    <div class="status-item">
+                        <div id="objectCount" class="status-value">0</div>
+                        <div class="status-label">Suspicious Objects</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="events-section">
+                <h2 class="section-title">Event Log</h2>
+                
+                <div id="eventLog" class="event-log">
+                    <!-- Events will be added here dynamically -->
+                </div>
+                
+                <button id="clearLogBtn" class="btn-info">Clear Log</button>
+            </div>
+        </div>
+
+        <div class="session-section">
+            <h2 class="section-title">Session Management</h2>
+            
+            <div class="session-controls">
+                <input type="text" id="candidateName" placeholder="Candidate Name">
+                <button id="startSessionBtn" class="btn-warning">Start Interview Session</button>
+                <button id="endSessionBtn" class="btn-danger" disabled>End Interview Session</button>
+                <div id="sessionTimer" class="status-value">00:00:00</div>
+                <div id="sessionStatus" class="session-status session-inactive">No Active Session</div>
+            </div>
+            
+            <div id="reportSection" class="report-section">
+                <h3>Session Summary Report</h3>
+                <div id="reportGrid" class="report-grid">
+                    <!-- Report items will be generated here -->
+                </div>
+                <div id="reportDetails"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
