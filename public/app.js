@@ -9,7 +9,7 @@ let currentSessionId = null;
 const API_BASE_URL = 
   window.location.hostname === "localhost"
     ? "http://localhost:3000/api"   // local dev ke liye
-    : "https://focus-detection-backend.onrender.com/api";  // Render backend ke liye 
+    : "https://interview-monitoring-system-1.onrender.com/api";  // Render backend ke liye 
 
 // Timing variables
 let noFaceStartTime = null;
