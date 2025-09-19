@@ -6,7 +6,7 @@ let isSessionActive = false;
 let sessionStartTime = null;
 let sessionTimer = null;
 let currentSessionId = null;
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = '/api'; 
 
 // Timing variables
 let noFaceStartTime = null;
